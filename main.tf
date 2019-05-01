@@ -17,18 +17,6 @@ provider "vsphere" {
   allow_unverified_ssl = true
 }
 
-variable "vsphere_user" {
-  description = "vsphere_user"
-}
-
-variable "vsphere_password" {
-  description = "vsphere_password"
-}
-
-variable "vsphere_server" {
-  description = "vsphere_server"
-}
-
 data "vsphere_datacenter" "dc" {
   name = "automation_workshop"
 }
