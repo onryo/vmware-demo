@@ -10,6 +10,15 @@ variable "vsphere_server" {
   description = "vsphere_server"
 }
 
-variable "var.dc_name" {
+variable "dc_name" {
   description = "DC Name"
 }
+
+variable "datastore" {
+  description = "Datastore"
+}
+
+variable "vm_name" {
+  description = "Vm name"
+}
+
