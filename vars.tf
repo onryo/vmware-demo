@@ -22,3 +22,6 @@ variable "vm_name" {
   description = "Vm name"
 }
 
+variable "pool" {
+  description = "Vm pool"
+}
