@@ -1,5 +1,6 @@
 data "vsphere_virtual_machine" "template_from_ovf" {
 name = "templatebeatles"
+datacenter_id = "${data.vsphere_datacenter.dc.id}"
 }
 
 
