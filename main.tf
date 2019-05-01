@@ -7,9 +7,7 @@ provider "vsphere" {
   allow_unverified_ssl = true
 }
 
-data "vsphere_datacenter" "dc" {
-  name = "${var.dc_name}"
-}
+
 
 data "vsphere_datastore" "datastore" {
   name          = "${var.datastore}"
@@ -21,10 +19,6 @@ data "vsphere_resource_pool" "pool" {
   datacenter_id = "${data.vsphere_datacenter.dc.id}"
 }
 
-data "vsphere_network" "network" {
-  name          = "automation_test"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
-}
 
 resource "vsphere_virtual_machine" "vm" {
   name             = "${var.vm_name}"
