@@ -1,13 +1,4 @@
-terraform {
-  backend "remote" {
-    hostname = "ptfepoc.premera.cloud"
-    organization = "Premera"
 
-    workspaces {
-      name = "vmware-demo"
-    }
-  }
-}
 provider "vsphere" {
   user           = "${var.vsphere_user}"
   password       = "${var.vsphere_password}"
