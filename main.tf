@@ -20,11 +20,11 @@ variable "vsphere_server" {
 }
 
 data "vsphere_datacenter" "dc" {
-  name = "dc1"
+  name = "automation_workshop"
 }
 
 data "vsphere_datastore" "datastore" {
-  name          = "datastore1"
+  name          = "DCALCVM30_LAB_005DB"
   datacenter_id = "${data.vsphere_datacenter.dc.id}"
 }
 
@@ -34,7 +34,7 @@ data "vsphere_resource_pool" "pool" {
 }
 
 data "vsphere_network" "network" {
-  name          = "public"
+  name          = "automation_test"
   datacenter_id = "${data.vsphere_datacenter.dc.id}"
 }
 
@@ -45,7 +45,7 @@ resource "vsphere_virtual_machine" "vm" {
 
   num_cpus = 2
   memory   = 1024
-  guest_id = "other3xLinux64Guest"
+  guest_id = "centos7_64Guest"
 
   network_interface {
     network_id = "${data.vsphere_network.network.id}"
