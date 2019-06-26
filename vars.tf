@@ -22,6 +22,10 @@ variable "vm_name" {
   description = "Vm name"
 }
 
-variable "pool" {
-  description = "Vm pool"
+variable "vm_network" {
+  description = "Vm Network"
+}
+
+variable "cluster" {
+  description = "Compute Cluster"
 }
