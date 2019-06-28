@@ -3,9 +3,16 @@ data "vsphere_virtual_machine" "template_from_ovf" {
   datacenter_id = "${data.vsphere_datacenter.dc_name.id}"
 }
 
+resource "random_string" "vm_name_suffix" {
+  length  = 4
+  upper   = false
+  lower   = true
+  number  = false
+  special = false
+}
 
 resource "vsphere_virtual_machine" "vm" {
-  name             = "${var.vm_name}"
+  name             = "${var.vm_name}-${random_string.name_suffix.result}"
   resource_pool_id = "${data.vsphere_compute_cluster.vsphere_compute_cluster.resource_pool_id}"
   datastore_id     = "${data.vsphere_datastore.vsphere_datastore.id}"
 

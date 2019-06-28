@@ -7,6 +7,8 @@ provider "vsphere" {
   allow_unverified_ssl = true
 }
 
+provider "random" {}
+
 data "vsphere_datacenter" "dc_name" {
   name = "${var.dc_name}"
 }
