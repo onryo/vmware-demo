@@ -1,6 +1,6 @@
 data "vsphere_virtual_machine" "template_from_ovf" {
-  name          = "${var.vm_template_name}"
-  datacenter_id = "${data.vsphere_datacenter.dc_name.id}"
+  name          = var.vm_template_name
+  datacenter_id = data.vsphere_datacenter.dc_name.id
 }
 
 resource "random_string" "vm_name_suffix" {
@@ -13,16 +13,16 @@ resource "random_string" "vm_name_suffix" {
 
 resource "vsphere_virtual_machine" "vm" {
   name             = "${var.vm_name}-${random_string.vm_name_suffix.result}"
-  resource_pool_id = "${data.vsphere_compute_cluster.vsphere_compute_cluster.resource_pool_id}"
-  datastore_id     = "${data.vsphere_datastore.vsphere_datastore.id}"
+  resource_pool_id = data.vsphere_compute_cluster.vsphere_compute_cluster.resource_pool_id
+  datastore_id     = data.vsphere_datastore.vsphere_datastore.id
 
   clone {
-    template_uuid = "${data.vsphere_virtual_machine.template_from_ovf.id}"
+    template_uuid = data.vsphere_virtual_machine.template_from_ovf.id
   }
 
   vapp {
     properties = {
-      public-keys = "${var.ssh_public_key}"
+      public-keys = var.ssh_public_key
     }
   }
 
@@ -31,7 +31,7 @@ resource "vsphere_virtual_machine" "vm" {
   guest_id = "ubuntu64Guest"
 
   network_interface {
-    network_id = "${data.vsphere_network.vm_network.id}"
+    network_id = data.vsphere_network.vm_network.id
   }
 
   disk {
@@ -44,3 +44,4 @@ resource "vsphere_virtual_machine" "vm" {
     client_device = true
   }
 }
+
