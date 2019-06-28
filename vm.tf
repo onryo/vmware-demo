@@ -1,27 +1,39 @@
 data "vsphere_virtual_machine" "template_from_ovf" {
-name = "UbuntuTemplate"
-datacenter_id = "${data.vsphere_datacenter.dc.id}"
+  name          = "${var.vm_template_name}"
+  datacenter_id = "${data.vsphere_datacenter.dc_name.id}"
 }
 
 
 resource "vsphere_virtual_machine" "vm" {
   name             = "${var.vm_name}"
- resource_pool_id = "${data.vsphere_resource_pool.pool.id}"
-#  resource_pool_id = "${var.pool}"
-  datastore_id     = "${data.vsphere_datastore.datastore.id}"
-clone {
+  resource_pool_id = "${data.vsphere_compute_cluster.vsphere_compute_cluster.resource_pool_id}"
+  datastore_id     = "${data.vsphere_datastore.vsphere_datastore.id}"
+
+  clone {
     template_uuid = "${data.vsphere_virtual_machine.template_from_ovf.id}"
- }
+  }
+
+  vapp {
+    properties = {
+      public-keys = "${var.ssh_public_key}"
+    }
+  }
+
   num_cpus = 2
   memory   = 1024
-  guest_id = "centos7_64Guest"
+  guest_id = "ubuntu64Guest"
 
   network_interface {
-    network_id = "${data.vsphere_network.network.id}"
+    network_id = "${data.vsphere_network.vm_network.id}"
   }
 
   disk {
     label = "disk0"
     size  = 20
+  }
+
+  # required to support vApp
+  cdrom {
+    client_device = true
   }
 }
