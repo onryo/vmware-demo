@@ -12,7 +12,7 @@ resource "random_string" "vm_name_suffix" {
 }
 
 resource "vsphere_virtual_machine" "vm" {
-  name             = "${var.vm_name}-${random_string.name_suffix.result}"
+  name             = "${var.vm_name}-${random_string.vm_name_suffix.result}"
   resource_pool_id = "${data.vsphere_compute_cluster.vsphere_compute_cluster.resource_pool_id}"
   datastore_id     = "${data.vsphere_datastore.vsphere_datastore.id}"
 
