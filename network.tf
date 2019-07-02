@@ -1,7 +1,5 @@
-data "vsphere_datacenter" "dc" {
-  name = "${var.dc_name}"
+data "vsphere_network" "vm_network" {
+  name          = var.vm_network
+  datacenter_id = data.vsphere_datacenter.dc_name.id
 }
-data "vsphere_network" "network" {
-  name   = "VM Network"
-  datacenter_id = "${data.vsphere_datacenter.dc.id}"
-}
+
