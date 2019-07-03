@@ -24,7 +24,7 @@ variable "datastore_name" {
 
 variable "vm_template_name" {
   description = "VM Template to clone"
-  default     = "UbuntuTemplate"
+  default     = "WinDev1905Eval"
 }
 
 variable "vm_name" {
@@ -34,9 +34,3 @@ variable "vm_name" {
 variable "vm_network" {
   description = "VM Network"
 }
-
-variable "ssh_public_key" {
-  description = "SSH public key to inject into VM"
-  default     = ""
-}
-

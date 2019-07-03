@@ -20,15 +20,9 @@ resource "vsphere_virtual_machine" "vm" {
     template_uuid = data.vsphere_virtual_machine.template_from_ovf.id
   }
 
-  vapp {
-    properties = {
-      public-keys = var.ssh_public_key
-    }
-  }
-
   num_cpus = 2
-  memory   = 1024
-  guest_id = "ubuntu64Guest"
+  memory   = 2048
+  guest_id = "windows9_64Guest"
 
   network_interface {
     network_id = data.vsphere_network.vm_network.id
@@ -44,4 +38,3 @@ resource "vsphere_virtual_machine" "vm" {
     client_device = true
   }
 }
-
