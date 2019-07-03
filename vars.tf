@@ -24,11 +24,19 @@ variable "datastore_name" {
 
 variable "vm_template_name" {
   description = "VM Template to clone"
-  default     = "WinDev1905Eval"
+}
+
+variable "vm_guest_id" {
+  description = "VM Guest ID (ubuntu64Guest, windows9_64Guest, etc.)"
 }
 
 variable "vm_name" {
   description = "VM Name"
+}
+
+variable "vm_folder" {
+  description = "VM Folder"
+  default     = ""
 }
 
 variable "vm_network" {
