@@ -30,8 +30,10 @@ resource "vsphere_virtual_machine" "vm" {
   }
 
   disk {
-    label = "disk0"
-    size  = 20
+    label            = "disk0"
+    size             = var.vm_disk_size
+    eagerly_scrub    = data.vsphere_virtual_machine.template_from_ovf.disks.0.eagerly_scrub
+    thin_provisioned = data.vsphere_virtual_machine.template_from_ovf.disks.0.thin_provisioned
   }
 
   # required to support vApp
